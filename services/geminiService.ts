@@ -12,8 +12,12 @@ export const generateStudyContent = async (subject: string, prompt: string, imag
   const genAI = new GoogleGenerativeAI(API_KEY);
   
   // 3. Cấu hình Model với Schema để ép AI trả về JSON chuẩn
-  const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash", // Dùng 1.5-flash để ổn định nhất hiện nay
+    // Sửa lại dòng khởi tạo trong geminiService.ts
+const genAI = new GoogleGenerativeAI(API_KEY);
+const model = genAI.getGenerativeModel({ 
+  model: "gemini-1.5-flash",
+  apiVersion: 'v1beta' // THÊM DÒNG NÀY VÀO ĐÂY
+});
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: {
